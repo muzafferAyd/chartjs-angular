@@ -1,5 +1,6 @@
-import {Component, ViewChild, ElementRef, OnInit} from '@angular/core';
+import {Component, ViewChild, ElementRef, OnInit, Inject, PLATFORM_ID} from '@angular/core';
 import 'chartjs-plugin-annotation';
+import {isPlatformBrowser} from '@angular/common';
 
 // declare const $: any;
 
@@ -8,7 +9,6 @@ import 'chartjs-plugin-annotation';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-
 
 export class AppComponent  implements  OnInit {
 
@@ -20,6 +20,11 @@ export class AppComponent  implements  OnInit {
   public chartLabels: any[];
   public chartColors: any[];
   public chartOptions: any;
+  public isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   ngOnInit() {
 
